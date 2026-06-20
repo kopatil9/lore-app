@@ -217,3 +217,4 @@ Guests just open the link, enter their name, and get their mission automatically
 - Mission assignment is weighted so popular missions don't get over-assigned
 - All media is served from public Supabase Storage URLs (no expiry)
 - The recap page is fully shareable via its URL and works without login
+# lore-app
