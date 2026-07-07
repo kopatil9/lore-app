@@ -1,85 +1,89 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase.js'
+import { isLocked, unlockLabel } from '../lib/lock.js'
+import landingBg from '../assets/landing-bg.png'
 
-const EVENT_CODE = import.meta.env.VITE_EVENT_CODE || 'ATE2024'
+const EVENT_CODE = import.meta.env.VITE_EVENT_CODE || 'KOTWENTYATE'
+
+function normalizeName(value) {
+  return value.trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
 
 function LandingPage() {
+  const [step, setStep] = useState('home')   // 'home' | 'name'
+  const [intent, setIntent] = useState(null) // 'mission' | 'give'
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleEnter = async (e) => {
+  const openNameStep = (selectedIntent) => {
+    setIntent(selectedIntent)
+    setError('')
+    setName('')
+    setStep('name')
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!name.trim()) return setError('Enter your name to get your mission.')
+    e.stopPropagation()
+
+    const typedName = normalizeName(name)
+    if (!typedName) {
+      setError('Enter your name to continue.')
+      return
+    }
 
     setLoading(true)
     setError('')
 
     try {
-      // Get event
       const { data: event, error: eventErr } = await supabase
         .from('events')
         .select('*')
         .eq('code', EVENT_CODE)
-        .single()
+        .maybeSingle()
 
-      if (eventErr || !event) throw new Error('Event not found. Check the app setup.')
+      if (eventErr) throw eventErr
+      if (!event) throw new Error('Event not found yet. Ask Komal to set it up.')
       if (!event.is_active) throw new Error('This party has ended. The lore is already canon.')
 
-      // Get missions and already-assigned mission IDs
-      const { data: missions } = await supabase
-        .from('missions')
-        .select('*')
-        .eq('event_id', event.id)
-
-      const { data: existingGuests } = await supabase
+      const { data: guests, error: guestErr } = await supabase
         .from('guests')
-        .select('assigned_mission_id')
+        .select('id, name, assigned_mission_id')
         .eq('event_id', event.id)
-
-      if (!missions || missions.length === 0) {
-        throw new Error('No missions found. Ask the host to set up the missions.')
-      }
-
-      // Pick least-used mission
-      const usedCounts = {}
-      existingGuests?.forEach(g => {
-        if (g.assigned_mission_id) {
-          usedCounts[g.assigned_mission_id] = (usedCounts[g.assigned_mission_id] || 0) + 1
-        }
-      })
-
-      const sorted = [...missions].sort((a, b) => {
-        return (usedCounts[a.id] || 0) - (usedCounts[b.id] || 0)
-      })
-
-      // Add randomness among least-used missions
-      const minCount = usedCounts[sorted[0].id] || 0
-      const leastUsed = sorted.filter(m => (usedCounts[m.id] || 0) === minCount)
-      const chosenMission = leastUsed[Math.floor(Math.random() * leastUsed.length)]
-
-      // Create guest
-      const { data: guest, error: guestErr } = await supabase
-        .from('guests')
-        .insert({
-          event_id: event.id,
-          name: name.trim(),
-          assigned_mission_id: chosenMission.id,
-        })
-        .select()
-        .single()
 
       if (guestErr) throw guestErr
 
-      // Store in session
-      sessionStorage.setItem('lore_guest_id', guest.id)
-      sessionStorage.setItem('lore_guest_name', guest.name)
-      sessionStorage.setItem('lore_mission_id', chosenMission.id)
-      sessionStorage.setItem('lore_event_id', event.id)
+      const matchedGuest = (guests || []).find(
+        (g) => normalizeName(g.name) === typedName
+      )
 
-      navigate('/mission')
+      if (!matchedGuest) {
+        throw new Error("Hmm I don't see you on the lore list — try your full name or ask Komal.")
+      }
+
+      sessionStorage.setItem('lore_event_id', event.id)
+      sessionStorage.setItem('lore_guest_id', matchedGuest.id)
+      sessionStorage.setItem('lore_guest_name', matchedGuest.name)
+      if (matchedGuest.assigned_mission_id) {
+        sessionStorage.setItem('lore_mission_id', matchedGuest.assigned_mission_id)
+      }
+
+      if (intent === 'give') {
+        navigate('/give-mission')
+      } else {
+        // 'mission' intent — locked until unlock_at
+        if (isLocked(event)) {
+          throw new Error(`Missions unlock ${unlockLabel(event)}. You can still send Komal a mission until then!`)
+        }
+        if (!matchedGuest.assigned_mission_id) {
+          throw new Error("Your mission hasn't been assigned yet. Ask Komal!")
+        }
+        navigate('/mission')
+      }
     } catch (err) {
       setError(err.message || 'Something went wrong. Try again.')
     } finally {
@@ -88,62 +92,80 @@ function LandingPage() {
   }
 
   return (
-    <div className="landing-wrap">
-      <div className="landing-bg-glow" />
+    <div className="kta-scroll">
+      <div className="kta-stage">
+        {/* Full design image as background */}
+        <img src={landingBg} alt="Ko Twenty Ate" className="kta-stage-bg" draggable={false} />
 
-      <div className="landing-content">
-        <div className="landing-wordmark">Lore</div>
-        <div className="landing-event">Mission: ATE</div>
+        {/* Real "host" button (top-right) — always visible even if the image crops */}
+        <button
+          type="button"
+          className="kta-host-btn"
+          onClick={() => navigate('/admin')}
+        >
+          host
+        </button>
 
-        <p className="landing-tagline">
-          You've been assigned a mission. Complete it before the night ends.
-          Submit proof. At midnight, the lore becomes canon.
-        </p>
-
-        <form onSubmit={handleEnter}>
-          {error && <div className="error-box">{error}</div>}
-
-          <div className="form-group">
-            <label className="label" htmlFor="name">Your Name</label>
-            <input
-              id="name"
-              className="input"
-              type="text"
-              placeholder="What do they call you?"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              autoComplete="off"
-              autoFocus
-              maxLength={50}
+        {step === 'home' && (
+          <>
+            {/* Invisible click zones over the painted buttons */}
+            <button
+              type="button"
+              className="kta-hit kta-hit-primary"
+              onClick={() => openNameStep('mission')}
+              aria-label="Get My Mission"
             />
+            <button
+              type="button"
+              className="kta-hit kta-hit-secondary"
+              onClick={() => openNameStep('give')}
+              aria-label="Give Komal a Mission"
+            />
+          </>
+        )}
+
+        {/* Name entry panel — appears after tapping a button */}
+        {step === 'name' && (
+          <div className="kta-name-overlay">
+            <form className="kta-name-card" onSubmit={handleSubmit}>
+              <p className="kta-name-title">
+                {intent === 'give' ? "Who's sending this?" : 'Your mission is waiting.'}
+              </p>
+              <p className="kta-name-hint">
+                {intent === 'give'
+                  ? 'enter your name so Komal knows who to blame'
+                  : 'enter your name exactly as Komal has it'}
+              </p>
+
+              <input
+                type="text"
+                className="kta-input"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => { setName(e.target.value); setError('') }}
+                autoFocus
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="words"
+                maxLength={50}
+              />
+
+              {error && <div className="kta-error">{error}</div>}
+
+              <button type="submit" className="btn-pill kta-continue" disabled={loading || !name.trim()}>
+                {loading ? 'one sec…' : 'Continue'}
+              </button>
+
+              <button
+                type="button"
+                className="kta-back-link"
+                onClick={() => { setStep('home'); setError(''); setName('') }}
+              >
+                back
+              </button>
+            </form>
           </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={loading || !name.trim()}
-          >
-            {loading ? (
-              <><div className="spinner" style={{ width: 18, height: 18, margin: 0 }} /> Assigning mission...</>
-            ) : (
-              'Enter the Lore →'
-            )}
-          </button>
-
-          <div className="text-center mt-md">
-            <span className="text-dim text-small">No proof, no lore.</span>
-          </div>
-        </form>
-
-        <div style={{ marginTop: 'auto', paddingTop: 40 }}>
-          <a
-            href="/board"
-            className="btn btn-ghost w-full text-center"
-            style={{ display: 'block' }}
-          >
-            📸 View the Evidence Board
-          </a>
-        </div>
+        )}
       </div>
     </div>
   )

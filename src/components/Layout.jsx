@@ -1,41 +1,39 @@
+// Layout is now only used by AdminPage.
+// All other pages handle their own full-bleed layout.
 import { Link, useLocation } from 'react-router-dom'
 
-function Layout({ children, showNav = true, hideHeader = false }) {
+function Layout({ children }) {
   const location = useLocation()
 
-  const navItems = [
-    { path: '/mission', label: 'Mission', icon: '🎯' },
-    { path: '/board', label: 'Evidence', icon: '📸' },
-    { path: '/submit', label: 'Submit', icon: '⬆️' },
-  ]
-
   return (
-    <div className="layout">
-      {!hideHeader && (
-        <header className="layout-header">
-          <Link to="/" className="layout-logo">Lore</Link>
-          <span className="layout-event-name">Mission: ATE</span>
-        </header>
-      )}
+    <div className="white-screen">
+      <div className="white-header">
+        <Link to="/" style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.1rem', fontStyle: 'italic', color: '#6B73E8', textDecoration: 'none' }}>
+          Lore
+        </Link>
+        <span style={{ fontSize: '0.72rem', color: '#9999AA', fontWeight: 500 }}>Ko Twenty Ate</span>
+      </div>
 
-      <main className={`layout-content ${showNav ? 'has-bottom-nav' : ''}`} style={{ paddingTop: 24 }}>
+      <div className="white-content has-bottom-nav" style={{ paddingTop: 20 }}>
         {children}
-      </main>
+      </div>
 
-      {showNav && (
-        <nav className="bottom-nav">
-          {navItems.map(item => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={location.pathname === item.path ? 'active' : ''}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <nav className="bottom-nav">
+        {[
+          { path: '/mission', label: 'Mission', icon: '✦' },
+          { path: '/board',   label: 'Evidence', icon: '⊞' },
+          { path: '/submit',  label: 'Submit',  icon: '↑' },
+        ].map(item => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={location.pathname === item.path ? 'active' : ''}
+          >
+            <span className="nav-icon">{item.icon}</span>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </div>
   )
 }

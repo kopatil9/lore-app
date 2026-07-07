@@ -1,0 +1,147 @@
+/* ============================================================
+   KO TWENTY ATE — Landing (image background + overlays)
+   Paste into src/styles/global.css, replacing any old
+   .figma-landing-* or .kta-* landing rules.
+============================================================ */
+
+.kta-scroll {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #6b8bd6;      /* matches the blue chrome image edges */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+/* Stage fills the full screen height like the other pages (photo-screen).
+   Background uses cover; photos sit in the side margins. */
+.kta-stage {
+  position: relative;
+  width: min(430px, 100vw);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.kta-stage-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── INVISIBLE CLICK ZONES over the painted buttons ── */
+.kta-hit {
+  position: absolute;
+  z-index: 20;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.kta-hit:active { background: rgba(255, 255, 255, 0.08); }
+
+.kta-hit-primary   { top: 69.1%; left: 10.6%; width: 86.7%; height: 7.6%; border-radius: 999px; }
+.kta-hit-secondary { top: 81.3%; left: 10.8%; width: 76.0%; height: 5.3%; border-radius: 999px; }
+
+/* ── REAL HOST BUTTON (matches the painted white pill) ── */
+.kta-host-btn {
+  position: absolute;
+  z-index: 20;
+  top: calc(16px + env(safe-area-inset-top));
+  right: 18px;
+  padding: 9px 24px;
+  border: none;
+  border-radius: 999px;
+  background: #f7f8fd;
+  color: #050505;
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+.kta-host-btn:active { transform: scale(0.97); }
+
+/* ── NAME ENTRY OVERLAY ── */
+.kta-name-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 5% 6%;
+  background: linear-gradient(to top, rgba(12,16,50,0.82) 0%, rgba(12,16,50,0.4) 45%, transparent 80%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.kta-name-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kta-name-title {
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.kta-name-hint {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.82rem;
+  margin: -4px 0 4px;
+  text-align: center;
+}
+
+.kta-input {
+  width: 100%;
+  padding: 15px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+}
+.kta-input::placeholder { color: rgba(255,255,255,0.5); }
+.kta-input:focus { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.22); }
+
+.kta-continue { width: 100%; }
+
+.kta-error {
+  padding: 11px 15px;
+  border-radius: 12px;
+  background: rgba(200,50,50,0.24);
+  border: 1px solid rgba(255,120,120,0.35);
+  color: #ffdede;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.kta-back-link {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 4px;
+}
