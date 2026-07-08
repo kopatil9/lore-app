@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase.js'
 import EvidenceCard from '../components/EvidenceCard.jsx'
 
@@ -38,6 +39,7 @@ function BoardPage() {
 
   const currentGuestId = sessionStorage.getItem('lore_guest_id')
   const isAdmin = sessionStorage.getItem('lore_admin_authed') === 'true'
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchSubmissions()
@@ -95,6 +97,17 @@ function BoardPage() {
     <div className="white-screen">
       <div className="white-header">
         <div>
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            style={{
+              background: 'none', border: 'none', color: '#6B73E8',
+              fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
+              padding: 0, marginBottom: 4, fontFamily: 'inherit',
+            }}
+          >
+            ← home
+          </button>
           <div className="white-header-title">evidence board</div>
           <div style={{ fontSize: '0.72rem', color: '#9999AA', marginTop: 1 }}>
             {groups.length} moment{groups.length !== 1 ? 's' : ''} captured
