@@ -113,14 +113,14 @@ function LandingPage() {
               className="kta-btn-primary"
               onClick={() => openNameStep('mission')}
             >
-              GET MY MISSION
+              Get My <span className="kta-squiggle">Mission</span>
             </button>
             <button
               type="button"
               className="kta-btn-secondary"
               onClick={() => openNameStep('give')}
             >
-              GIVE KOMAL A MISSION
+              Give Komal a <span className="kta-squiggle">Mission</span>
             </button>
           </div>
         )}

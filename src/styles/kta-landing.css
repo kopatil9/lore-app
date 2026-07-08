@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
+
 /* ============================================================
    KO TWENTY ATE — Landing (image background + overlays)
    Paste into src/styles/global.css, replacing any old
@@ -36,57 +38,63 @@
   pointer-events: none;
 }
 
-/* ── REAL BOTTOM BUTTONS (cover the painted ones, aligned on every screen) ── */
+/* ── REAL BOTTOM BUTTONS (fun font, aligned on every screen) ── */
 .kta-bottom {
   position: absolute;
   z-index: 20;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 60px 26px calc(48px + env(safe-area-inset-bottom));
+  padding: 0 26px calc(44px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 14px;
-  /* Scrim hides the painted buttons in the image behind the real ones */
-  background: linear-gradient(
-    to top,
-    #6f92dc 0%,
-    #6f92dc 60%,
-    rgba(111, 146, 220, 0) 100%
-  );
 }
 
-.kta-btn-primary {
+.kta-btn-primary,
+.kta-btn-secondary {
   width: 100%;
   padding: 18px 28px;
   border: none;
   border-radius: 999px;
+  font-family: "Fredoka", "Plus Jakarta Sans", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.kta-btn-primary {
   background: #4a63e8;
   color: #ffffff;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  cursor: pointer;
   box-shadow: 0 8px 24px rgba(74, 99, 232, 0.5);
 }
 .kta-btn-primary:active { transform: scale(0.99); }
 
 .kta-btn-secondary {
-  width: 100%;
-  padding: 17px 28px;
-  border: none;
-  border-radius: 999px;
   background: #eef1fb;
   color: #4a63e8;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  cursor: pointer;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 .kta-btn-secondary:active { transform: scale(0.99); }
+
+/* Pink squiggle under the word "Mission" */
+.kta-squiggle {
+  position: relative;
+  display: inline-block;
+}
+.kta-squiggle::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: -9px;
+  height: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='8' viewBox='0 0 60 8'%3E%3Cpath d='M1 5 C 10 1, 18 8, 28 4 S 46 1, 59 4' fill='none' stroke='%23ff5fbf' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 
 /* ── REAL HOST BUTTON (matches the painted white pill) ── */
 .kta-host-btn {
@@ -99,9 +107,9 @@
   border-radius: 999px;
   background: #f7f8fd;
   color: #050505;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: "Fredoka", "Plus Jakarta Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
 }
