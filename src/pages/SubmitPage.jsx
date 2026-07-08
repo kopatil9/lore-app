@@ -201,7 +201,6 @@ function SubmitPage() {
             type="file"
             accept="image/*,video/*"
             multiple
-            capture="environment"
             onChange={e => { if (e.target.files?.length) handleFiles(e.target.files) }}
           />
           <div style={{ fontSize: '1.8rem', marginBottom: 6 }}>📸</div>
