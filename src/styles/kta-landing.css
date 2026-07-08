@@ -36,21 +36,57 @@
   pointer-events: none;
 }
 
-/* ── INVISIBLE CLICK ZONES over the painted buttons ── */
-.kta-hit {
+/* ── REAL BOTTOM BUTTONS (cover the painted ones, aligned on every screen) ── */
+.kta-bottom {
   position: absolute;
   z-index: 20;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  -webkit-tap-highlight-color: transparent;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 60px 26px calc(48px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* Scrim hides the painted buttons in the image behind the real ones */
+  background: linear-gradient(
+    to top,
+    #6f92dc 0%,
+    #6f92dc 60%,
+    rgba(111, 146, 220, 0) 100%
+  );
 }
-.kta-hit:active { background: rgba(255, 255, 255, 0.08); }
 
-.kta-hit-primary   { top: 69.1%; left: 10.6%; width: 86.7%; height: 7.6%; border-radius: 999px; }
-.kta-hit-secondary { top: 81.3%; left: 10.8%; width: 76.0%; height: 5.3%; border-radius: 999px; }
+.kta-btn-primary {
+  width: 100%;
+  padding: 18px 28px;
+  border: none;
+  border-radius: 999px;
+  background: #4a63e8;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(74, 99, 232, 0.5);
+}
+.kta-btn-primary:active { transform: scale(0.99); }
+
+.kta-btn-secondary {
+  width: 100%;
+  padding: 17px 28px;
+  border: none;
+  border-radius: 999px;
+  background: #eef1fb;
+  color: #4a63e8;
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+.kta-btn-secondary:active { transform: scale(0.99); }
 
 /* ── REAL HOST BUTTON (matches the painted white pill) ── */
 .kta-host-btn {

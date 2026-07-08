@@ -107,21 +107,22 @@ function LandingPage() {
         </button>
 
         {step === 'home' && (
-          <>
-            {/* Invisible click zones over the painted buttons */}
+          <div className="kta-bottom">
             <button
               type="button"
-              className="kta-hit kta-hit-primary"
+              className="kta-btn-primary"
               onClick={() => openNameStep('mission')}
-              aria-label="Get My Mission"
-            />
+            >
+              GET MY MISSION
+            </button>
             <button
               type="button"
-              className="kta-hit kta-hit-secondary"
+              className="kta-btn-secondary"
               onClick={() => openNameStep('give')}
-              aria-label="Give Komal a Mission"
-            />
-          </>
+            >
+              GIVE KOMAL A MISSION
+            </button>
+          </div>
         )}
 
         {/* Name entry panel — appears after tapping a button */}
