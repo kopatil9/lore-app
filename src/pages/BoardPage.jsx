@@ -101,7 +101,7 @@ function BoardPage() {
             type="button"
             onClick={() => navigate('/')}
             style={{
-              background: 'none', border: 'none', color: '#6B73E8',
+              background: 'none', border: 'none', color: '#001FED',
               fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
               padding: 0, marginBottom: 4, fontFamily: 'inherit',
             }}
@@ -114,7 +114,7 @@ function BoardPage() {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.72rem', color: '#9999AA' }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#6B73E8', display: 'inline-block' }} />
+          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#001FED', display: 'inline-block' }} />
           live
         </div>
       </div>
@@ -124,7 +124,7 @@ function BoardPage() {
           {[['all','All'],['approved','Canon'],['pending','Pending']].map(([val, label]) => (
             <button key={val} onClick={() => setFilter(val)} style={{
               padding: '6px 16px', borderRadius: 999, border: filter === val ? 'none' : '1px solid #EBEBF0',
-              background: filter === val ? '#6B73E8' : 'white',
+              background: filter === val ? '#001FED' : 'white',
               color: filter === val ? 'white' : '#9999AA',
               fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer',
             }}>{label}</button>
@@ -140,7 +140,7 @@ function BoardPage() {
         {!loading && filtered.length === 0 && (
           <div className="empty-state">
             <div className="icon">📭</div>
-            <p style={{ fontWeight: 700, fontFamily: 'Syne, sans-serif', color: '#1A1A1A', marginBottom: 6 }}>Nothing yet</p>
+            <p style={{ fontWeight: 700, fontFamily: '"Share Tech Mono", monospace', color: '#1A1A1A', marginBottom: 6 }}>Nothing yet</p>
             <p style={{ fontSize: '0.85rem' }}>Get out there and make some lore.</p>
           </div>
         )}

@@ -35,8 +35,8 @@ export const backgrounds = {
 // Fallback gradient when no photo is set
 // You can change these colors to match your vibe
 export const fallbackGradients = {
-  landing: 'linear-gradient(170deg, #2C4A7C 0%, #1A2F5C 40%, #0F1A35 100%)',
-  mission: 'linear-gradient(170deg, #1E3A5F 0%, #0F2040 50%, #0A1428 100%)',
-  submit:  'linear-gradient(170deg, #2A3A6C 0%, #1A2550 50%, #0F1830 100%)',
-  recap:   'linear-gradient(170deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%)',
+  landing: 'linear-gradient(170deg, #000016 0%, #00051f 60%, #000c2c 100%)',
+  mission: 'linear-gradient(170deg, #000016 0%, #000a2e 55%, #00051f 100%)',
+  submit:  'linear-gradient(170deg, #00051f 0%, #000c2c 55%, #000016 100%)',
+  recap:   'linear-gradient(170deg, #000016 0%, #0015AD 120%)',
 }

@@ -8,8 +8,8 @@ const EVENT_CODE = import.meta.env.VITE_EVENT_CODE || 'KOTWENTYATE'
 const EVENT_NAME = 'Ko Twenty Ate'
 
 const P = {
-  blue: '#6B73E8',
-  purple: '#9B8FD8',
+  blue: '#001FED',
+  purple: '#24BBFE',
   dark: '#171722',
   mid: '#555566',
   light: '#9999AA',
@@ -733,9 +733,9 @@ function AdminPage() {
 const styles = {
   loginPage: {
     minHeight: '100vh',
-    background: 'linear-gradient(160deg, #5F8FE8 0%, #9B8FD8 55%, #25305F 100%)',
+    background: 'linear-gradient(160deg, #5F8FE8 0%, #24BBFE 55%, #25305F 100%)',
     display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 22,
-    fontFamily: '"Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+    fontFamily: '"Share Tech Mono", "Courier New", monospace',
   },
   loginCard: {
     width: '100%', maxWidth: 390, borderRadius: 28, padding: 24,
@@ -745,8 +745,8 @@ const styles = {
   loginTitle: { margin: '8px 0 4px', fontSize: 28, fontWeight: 900, letterSpacing: -1, color: P.dark },
   loginSubtitle: { margin: '0 0 18px', color: P.light, fontSize: 14, lineHeight: 1.5, fontWeight: 700 },
   loginInput: { width: '100%', height: 54, border: `1px solid ${P.border}`, borderRadius: 18, padding: '0 16px', fontSize: 16, fontWeight: 800, outline: 'none', marginBottom: 12 },
-  loginButton: { width: '100%', height: 54, border: 'none', borderRadius: 18, background: `linear-gradient(90deg, #7AB8E8, ${P.purple})`, color: '#FFFFFF', fontSize: 15, fontWeight: 900, cursor: 'pointer' },
-  page: { minHeight: '100vh', background: P.bg, color: P.dark, fontFamily: '"Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif' },
+  loginButton: { width: '100%', height: 54, border: 'none', borderRadius: 18, background: `linear-gradient(90deg, #001FED, ${P.purple})`, color: '#FFFFFF', fontSize: 15, fontWeight: 900, cursor: 'pointer' },
+  page: { minHeight: '100vh', background: P.bg, color: P.dark, fontFamily: '"Share Tech Mono", "Courier New", monospace' },
   header: { position: 'sticky', top: 0, zIndex: 20, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', borderBottom: `1px solid ${P.border}`, padding: '14px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 },
   backButton: { border: 'none', background: 'transparent', color: P.blue, fontWeight: 800, cursor: 'pointer', padding: 0, marginBottom: 4 },
   title: { margin: 0, fontSize: 22, letterSpacing: -0.8, fontWeight: 900 },
@@ -758,10 +758,10 @@ const styles = {
   cardEyebrow: { margin: 0, color: P.light, textTransform: 'uppercase', letterSpacing: 1, fontSize: 11, fontWeight: 900 },
   cardTitle: { margin: '3px 0', fontSize: 18, fontWeight: 900 },
   smallText: { margin: 0, color: P.light, fontSize: 13 },
-  primarySmall: { border: 'none', borderRadius: 999, padding: '11px 16px', background: `linear-gradient(90deg, #7AB8E8, ${P.purple})`, color: '#FFFFFF', fontWeight: 900, cursor: 'pointer' },
+  primarySmall: { border: 'none', borderRadius: 999, padding: '11px 16px', background: `linear-gradient(90deg, #001FED, ${P.purple})`, color: '#FFFFFF', fontWeight: 900, cursor: 'pointer' },
   statsGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 14 },
   statCard: { background: P.card, border: `1px solid ${P.border}`, borderRadius: 16, padding: '14px 8px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 2, color: P.light, fontSize: 11, fontWeight: 900, textTransform: 'uppercase' },
-  recapCard: { background: `linear-gradient(135deg, #7AB8E8, ${P.purple})`, borderRadius: 20, padding: 18, color: '#FFFFFF', marginBottom: 14, display: 'flex', justifyContent: 'space-between', gap: 14, alignItems: 'center' },
+  recapCard: { background: `linear-gradient(135deg, #001FED, ${P.purple})`, borderRadius: 20, padding: 18, color: '#FFFFFF', marginBottom: 14, display: 'flex', justifyContent: 'space-between', gap: 14, alignItems: 'center' },
   recapButton: { border: '1px solid rgba(255,255,255,0.45)', background: 'rgba(255,255,255,0.20)', color: '#FFFFFF', borderRadius: 999, padding: '11px 14px', fontWeight: 900, cursor: 'pointer', whiteSpace: 'nowrap' },
   tabs: { display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 14 },
   stack: { display: 'flex', flexDirection: 'column', gap: 12 },
@@ -772,7 +772,7 @@ const styles = {
   label: { display: 'block', margin: '14px 0 6px', color: P.mid, fontSize: 12, fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 },
   input: { width: '100%', height: 50, border: `1px solid ${P.border}`, borderRadius: 16, padding: '0 14px', fontSize: 15, fontWeight: 700, outline: 'none', fontFamily: 'inherit' },
   textarea: { width: '100%', border: `1px solid ${P.border}`, borderRadius: 16, padding: 14, fontSize: 15, fontWeight: 700, outline: 'none', resize: 'vertical', lineHeight: 1.5, fontFamily: 'inherit' },
-  primaryButton: { width: '100%', height: 54, border: 'none', borderRadius: 18, marginTop: 16, background: `linear-gradient(90deg, #7AB8E8, ${P.purple})`, color: '#FFFFFF', fontSize: 15, fontWeight: 900, cursor: 'pointer' },
+  primaryButton: { width: '100%', height: 54, border: 'none', borderRadius: 18, marginTop: 16, background: `linear-gradient(90deg, #001FED, ${P.purple})`, color: '#FFFFFF', fontSize: 15, fontWeight: 900, cursor: 'pointer' },
   guestCard: { background: P.card, border: `1px solid ${P.border}`, borderRadius: 20, padding: 16, display: 'flex', justifyContent: 'space-between', gap: 12 },
   guestName: { margin: 0, fontSize: 17, fontWeight: 900, letterSpacing: -0.4 },
   missionTitle: { color: P.blue, fontSize: 13, fontWeight: 900, margin: '6px 0 4px' },

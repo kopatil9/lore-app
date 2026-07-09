@@ -107,7 +107,7 @@ function EvidenceCard({ group, showActions = false, onApprove, onReject, onDelet
         <div className="evidence-card-footer">
           <span style={{
             fontSize: '0.65rem', fontWeight: 600,
-            color: group.status === 'approved' ? '#6B73E8' : group.status === 'rejected' ? '#C0392B' : '#BBBBC8',
+            color: group.status === 'approved' ? '#001FED' : group.status === 'rejected' ? '#C0392B' : '#BBBBC8',
             textTransform: 'uppercase', letterSpacing: '0.04em',
           }}>
             {group.status === 'approved' ? '✓ Canon' : group.status === 'rejected' ? '✗ Rejected' : '⏳ Pending'}
@@ -117,7 +117,7 @@ function EvidenceCard({ group, showActions = false, onApprove, onReject, onDelet
 
         {showActions && group.status === 'pending' && (
           <div style={{ display: 'flex', gap: 8, padding: '0 10px 10px' }}>
-            <button onClick={() => onApprove?.(group)} style={{ flex: 1, padding: '7px', borderRadius: 999, border: 'none', background: '#6B73E8', color: 'white', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}>✓ Approve</button>
+            <button onClick={() => onApprove?.(group)} style={{ flex: 1, padding: '7px', borderRadius: 999, border: 'none', background: '#001FED', color: 'white', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}>✓ Approve</button>
             <button onClick={() => onReject?.(group)} style={{ flex: 1, padding: '7px', borderRadius: 999, border: 'none', background: '#FFF0EE', color: '#C0392B', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}>✗ Reject</button>
           </div>
         )}
@@ -177,7 +177,7 @@ function EvidenceCard({ group, showActions = false, onApprove, onReject, onDelet
 
             <div style={{ textAlign: 'center', marginTop: 16, color: 'white' }}>
               <div style={{ fontWeight: 800, fontSize: '1.05rem' }}>{group.guests?.name}</div>
-              <div style={{ color: '#9B8FD8', fontSize: '0.82rem', fontWeight: 600, marginTop: 2 }}>
+              <div style={{ color: '#24BBFE', fontSize: '0.82rem', fontWeight: 600, marginTop: 2 }}>
                 {group.missions?.title}
               </div>
               {group.caption && (

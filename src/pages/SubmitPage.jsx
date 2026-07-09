@@ -115,7 +115,7 @@ function SubmitPage() {
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <div style={{
               width: 72, height: 72, borderRadius: '50%',
-              background: 'linear-gradient(135deg, #84c7ff, #a88bff)',
+              background: 'linear-gradient(135deg, #001FED, #0015AD)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 18px',
               fontSize: '2rem', color: 'white',

@@ -1,24 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
-
 /* ============================================================
-   KO TWENTY ATE — Landing (image background + overlays)
-   Paste into src/styles/global.css, replacing any old
-   .figma-landing-* or .kta-* landing rules.
+   KO TWENTY ATE — Landing (retro desktop)
+   Background image + real buttons anchored above the taskbar.
 ============================================================ */
 
 .kta-scroll {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  background: #6b8bd6;      /* matches the blue chrome image edges */
+  background: #000016;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   overflow-x: hidden;
 }
 
-/* Stage fills the full screen height like the other pages (photo-screen).
-   Background uses cover; photos sit in the side margins. */
 .kta-stage {
   position: relative;
   width: min(430px, 100vw);
@@ -38,154 +33,171 @@
   pointer-events: none;
 }
 
-/* ── REAL BOTTOM BUTTONS (fun font, aligned on every screen) ── */
+/* ── HOST BUTTON (top-right, over the painted pill) ── */
+.kta-host-btn {
+  position: absolute;
+  z-index: 20;
+  top: calc(18px + env(safe-area-inset-top));
+  right: 14px;
+  padding: 8px 18px;
+  border: 2px solid #000016;
+  border-radius: 999px;
+  background: #F3F3F8;
+  color: #000016;
+  font-family: "Share Tech Mono", "Courier New", monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #7a7a95, 3px 3px 0 rgba(0,0,0,0.6);
+}
+.kta-host-btn::after { content: " 🌐"; }
+.kta-host-btn:active { transform: translate(2px,2px); }
+
+/* ── BOTTOM BUTTONS (sit between the note window and the taskbar) ── */
 .kta-bottom {
   position: absolute;
   z-index: 20;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 26px calc(44px + env(safe-area-inset-bottom));
+  padding: 0 20px calc(42px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .kta-btn-primary,
 .kta-btn-secondary {
   width: 100%;
-  padding: 18px 28px;
-  border: none;
-  border-radius: 999px;
-  font-family: "Fredoka", "Plus Jakarta Sans", sans-serif;
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  padding: 15px 20px;
+  border: 2px solid #000016;
+  border-radius: 0;
+  font-family: "Share Tech Mono", "Courier New", monospace;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   cursor: pointer;
+  transition: transform 0.05s;
 }
 
 .kta-btn-primary {
-  background: #4a63e8;
+  background: #001FED;
   color: #ffffff;
-  box-shadow: 0 8px 24px rgba(74, 99, 232, 0.5);
+  box-shadow:
+    inset 2px 2px 0 rgba(120,180,255,0.9),
+    inset -2px -2px 0 #0015AD,
+    4px 4px 0 rgba(0,0,0,0.7);
 }
-.kta-btn-primary:active { transform: scale(0.99); }
+.kta-btn-primary:hover { background: #0a2cff; }
+.kta-btn-primary:active {
+  transform: translate(2px,2px);
+  box-shadow: inset 2px 2px 0 #0015AD, inset -2px -2px 0 rgba(120,180,255,0.6), 1px 1px 0 rgba(0,0,0,0.7);
+}
 
 .kta-btn-secondary {
-  background: #eef1fb;
-  color: #4a63e8;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  background: #F3F3F8;
+  color: #001FED;
+  box-shadow:
+    inset 2px 2px 0 #ffffff,
+    inset -2px -2px 0 #7a7a95,
+    4px 4px 0 rgba(0,0,0,0.6);
 }
-.kta-btn-secondary:active { transform: scale(0.99); }
-
-/* Pink squiggle under the word "Mission" */
-.kta-squiggle {
-  position: relative;
-  display: inline-block;
-}
-.kta-squiggle::after {
-  content: "";
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  bottom: -9px;
-  height: 7px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='8' viewBox='0 0 60 8'%3E%3Cpath d='M1 5 C 10 1, 18 8, 28 4 S 46 1, 59 4' fill='none' stroke='%23ff5fbf' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+.kta-btn-secondary:hover { background: #ffffff; }
+.kta-btn-secondary:active {
+  transform: translate(2px,2px);
+  box-shadow: inset 2px 2px 0 #7a7a95, inset -2px -2px 0 #fff, 1px 1px 0 rgba(0,0,0,0.6);
 }
 
-
-/* ── REAL HOST BUTTON (matches the painted white pill) ── */
-.kta-host-btn {
-  position: absolute;
-  z-index: 20;
-  top: calc(16px + env(safe-area-inset-top));
-  right: 18px;
-  padding: 9px 24px;
-  border: none;
-  border-radius: 999px;
-  background: #f7f8fd;
-  color: #050505;
-  font-family: "Fredoka", "Plus Jakarta Sans", sans-serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
-}
-.kta-host-btn:active { transform: scale(0.97); }
-
-/* ── NAME ENTRY OVERLAY ── */
+/* ── NAME ENTRY = retro dialog window ── */
 .kta-name-overlay {
   position: absolute;
   inset: 0;
   z-index: 40;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0 5% 6%;
-  background: linear-gradient(to top, rgba(12,16,50,0.82) 0%, rgba(12,16,50,0.4) 45%, transparent 80%);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  padding: 0 18px;
+  background: rgba(0, 0, 22, 0.78);
 }
 
 .kta-name-card {
   width: 100%;
+  max-width: 360px;
+  background: #F3F3F8;
+  border: 2px solid #000016;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #7a7a95, 6px 6px 0 rgba(0,0,0,0.7);
+  padding: 40px 16px 16px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+/* title bar */
+.kta-name-card::before {
+  content: "◾ enter_name.exe";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30px;
+  background: #001FED;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
 
 .kta-name-title {
-  color: #fff;
-  font-size: 1.15rem;
-  font-weight: 800;
+  color: #000016;
+  font-size: 1.05rem;
   margin: 0;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 0.03em;
 }
 
 .kta-name-hint {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.82rem;
-  margin: -4px 0 4px;
+  color: #5a5a72;
+  font-size: 0.8rem;
+  margin: -2px 0 4px;
   text-align: center;
 }
 
 .kta-input {
   width: 100%;
-  padding: 15px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.16);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
+  padding: 13px 14px;
+  border: 2px solid #000016;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000016;
   font-size: 1rem;
-  font-family: inherit;
+  font-family: "Share Tech Mono", "Courier New", monospace;
   outline: none;
+  box-shadow: inset 2px 2px 0 #7a7a95;
 }
-.kta-input::placeholder { color: rgba(255,255,255,0.5); }
-.kta-input:focus { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.22); }
+.kta-input::placeholder { color: #8a8aa5; }
+.kta-input:focus { border-color: #001FED; }
 
-.kta-continue { width: 100%; }
+.kta-continue {
+  width: 100%;
+  border-radius: 0 !important;
+}
 
 .kta-error {
-  padding: 11px 15px;
-  border-radius: 12px;
-  background: rgba(200,50,50,0.24);
-  border: 1px solid rgba(255,120,120,0.35);
-  color: #ffdede;
-  font-size: 0.85rem;
+  padding: 10px 12px;
+  border: 2px solid #c0392b;
+  background: #fff0f2;
+  color: #a02b20;
+  font-size: 0.82rem;
   text-align: left;
 }
 
 .kta-back-link {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.6);
+  color: #001FED;
   font-size: 0.85rem;
   font-family: inherit;
   cursor: pointer;
   padding: 4px;
+  text-decoration: underline;
 }

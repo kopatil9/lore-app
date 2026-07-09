@@ -8,7 +8,7 @@ function Layout({ children }) {
   return (
     <div className="white-screen">
       <div className="white-header">
-        <Link to="/" style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.1rem', fontStyle: 'italic', color: '#6B73E8', textDecoration: 'none' }}>
+        <Link to="/" style={{ fontFamily: '"Share Tech Mono", monospace', fontWeight: 800, fontSize: '1.1rem', fontStyle: 'italic', color: '#001FED', textDecoration: 'none' }}>
           Lore
         </Link>
         <span style={{ fontSize: '0.72rem', color: '#9999AA', fontWeight: 500 }}>Ko Twenty Ate</span>
