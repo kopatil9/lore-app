@@ -39,7 +39,7 @@
 .kta-host-btn {
   position: absolute;
   z-index: 20;
-  top: calc(clamp(10px, 2vh, 20px) + env(safe-area-inset-top));
+  top: calc(clamp(28px, 5.2vh, 56px) + env(safe-area-inset-top));
   right: clamp(10px, 3.5vw, 16px);
   padding: clamp(6px, 1vh, 9px) clamp(12px, 4vw, 18px);
   border: 2px solid #000016;
@@ -64,10 +64,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 clamp(12px, 4vw, 22px) calc(clamp(18px, 4.2vh, 40px) + env(safe-area-inset-bottom));
+  /* Centre the box row in the gap between the note window (73.8%)
+     and the taskbar (99.1%). Midpoint = 86.45%, so:
+       padding-bottom = (1 - 0.8645)*height - (box height / 2)     */
+  padding-left: clamp(12px, 4vw, 22px);
+  padding-right: clamp(12px, 4vw, 22px);
+  padding-bottom: max(20px, calc(13.55vh - clamp(38px, 7.25vh, 63px)));
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(8px, 2.5vw, 14px);
+}
+
+/* dvh is the accurate viewport on mobile browsers */
+@supports (height: 100dvh) {
+  .kta-bottom {
+    padding-bottom: max(20px, calc(13.55dvh - clamp(38px, 7.25dvh, 63px)));
+  }
+  .kta-btn-primary,
+  .kta-btn-secondary { height: clamp(76px, 14.5dvh, 126px); }
 }
 
 .kta-btn-primary,
@@ -82,7 +96,7 @@
   border: 2px solid #000016;
   border-radius: 0;
   font-family: "Share Tech Mono", "Courier New", monospace;
-  font-size: clamp(0.66rem, 3vw, 0.92rem);
+  font-size: clamp(0.8rem, 3.6vw, 1.12rem);
   line-height: 1.18;
   text-align: center;
   text-transform: uppercase;
